@@ -6,7 +6,7 @@ namespace FundamentosLenguaje
     {
         static void Main(string[] args)
         {
-            Mayortresnumeros();
+            SumarNumeros();
         }
 
         static void NumeroPositivoNegativo()
@@ -66,7 +66,99 @@ namespace FundamentosLenguaje
             Console.WriteLine("El numero intermedio es: " + intermedio);
             Console.WriteLine("El numero menor es: " + menor);
         }
+        static void DiaNacimiento()
+        {
+            Console.WriteLine("Introduce tu fecha de nacimiento: ");
+            Console.WriteLine("Dia: ");
+            int dia = int.Parse(Console.ReadLine());
+            Console.WriteLine("Mes: ");
+            int mes = int.Parse(Console.ReadLine());
+            Console.WriteLine("Año: ");
+            int año = int.Parse(Console.ReadLine());
+            if(mes == 1)
+            {
+                mes = 13;
+                año -= 1;
+            }else if(mes == 2)
+            {
+                mes = 14;
+                año -= 1;
+            }
+            int operacion1 = ((mes + 1) * 3) / 5;
+            int operacion2 = año / 4;
+            int operacion3 = año / 100;
+            int operacion4 = año / 400;
+            int operacion5 = dia + (mes * 2) + año + operacion1 + operacion2 - operacion3 + operacion4 + 2;
+            int operacion6 = operacion5 / 7;
+            int resultado = operacion5 - (operacion6 * 7);
 
+            if(resultado == 0)
+            {
+                Console.WriteLine("Sabado");
+            }else if (resultado == 1)
+            {
+                Console.WriteLine("Domingo");
+            }else if (resultado == 2)
+            {
+                Console.WriteLine("Lunes");
+            }else if (resultado == 3)
+            {
+                Console.WriteLine("Martes");
+            }else if (resultado == 4)
+            {
+                Console.WriteLine("Miercoles");
+            }else if(resultado == 5)
+            {
+                Console.WriteLine("Jueves");
+            }else
+            {
+                Console.WriteLine("Viernes");
+            }
+
+        }
+        static void ConjeturaCollatz() 
+        {
+            Console.WriteLine("Escribe un numero: ");
+            string dato = Console.ReadLine();
+            int numero = int.Parse(dato);
+            while(numero != 1)
+            {
+                if(numero % 2 == 0)
+                {
+                    numero = numero / 2;
+                }
+                else
+                {
+                    numero = numero * 3 + 1;
+                }
+                Console.WriteLine(numero);
+            }
+        }
+        static void NumerosPares()
+        {
+            Console.WriteLine("Introduce un rango de numeros: Inicial y final");
+            int inicio = int.Parse(Console.ReadLine());
+            int final = int.Parse(Console.ReadLine());
+            for (int i = inicio; i < final; i++)
+            {
+                if(i % 2 == 0)
+                {
+                    Console.WriteLine("Numero par: " + i);
+                }
+            }
+        }
+        static void SumarNumeros()
+        {
+            Console.WriteLine("Introduce un numero: ");
+            int numero = -1;
+            int suma = 0;
+            while (numero != 0){
+                numero = int.Parse(Console.ReadLine());
+                suma = suma + numero;
+                Console.WriteLine("La suma es: " + suma);
+                Console.WriteLine("Introduce un numero: ");
+            }
+        }
 
     }
 }
