@@ -1,12 +1,33 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
+using FundamentosLenguaje.Models;
 
 namespace FundamentosLenguaje
 {
+    enum TipoChar { Letras, Numeros, Simbolos }
     class Program
     {
         static void Main(string[] args)
         {
-            SumarNumeros();
+            Persona persona2 = new Persona("Lucas", "Perez");
+            Console.WriteLine(persona2.GetNombreCompleto());
+            Persona person = new Persona();
+            Empleado emp = new Empleado();
+            emp.Nombre = "Luis";
+            emp.Apellidos = "Garcia";
+            Console.WriteLine(emp.GetNombreCompleto());
+            emp.Salario = 1200;
+            person.Apellidos = "Ortega Bolivar";
+            person.Nombre = "Jesus";
+            person[0] = "Ojos Azules";
+            person[1] = "Pelo largo";
+            person[2] = "Pelo corto";
+            person.ConvertirDescripcion();
+            Console.WriteLine(person[0]);
+            Console.WriteLine(person.GetNombreCompleto());
+            Console.WriteLine(person.GetNombreCompleto(true));
         }
 
         static void NumeroPositivoNegativo()
@@ -159,7 +180,131 @@ namespace FundamentosLenguaje
                 Console.WriteLine("Introduce un numero: ");
             }
         }
+        static void EjemploChar(TipoChar tipo)
+        {
+            for (int i = 0; i <= 255; i++)
+            {
+                char letra = (char) i;
+                if (tipo == TipoChar.Simbolos)
+                {
+                    if (char.IsSymbol(letra))
+                    {
+                        Console.WriteLine(letra);
+                    }
+                }else if (tipo == TipoChar.Letras)
+                {
+                    if (char.IsLetter(letra))
+                    {
+                        Console.WriteLine(letra);
+                    }
+                }else if(tipo == TipoChar.Numeros)
+                {
+                    if (char.IsNumber(letra))
+                    {
+                        Console.WriteLine(letra);
+                    }
+                }
+            }
+        }
+        static void SumaNumericaString()
+        {
+            Console.WriteLine("Introduce un texto numerico");
+            string texto = Console.ReadLine();
+            int suma = 0;
+            for (var i = 0; i < texto.Length; i++)
+            {
+                //propiedad indizada de un conjunto
+                char caracter = texto[i];
+                //convertimos el caracter a numero
+                //En esta conversion recupera el codigo ascii
+                //int numero = (int)caracter;
+                int numero = int.Parse(caracter.ToString());
+                suma += numero;
+            }
+            Console.WriteLine(suma);
+        }
+        static void InvertirTextoString(string texto)
+        {
+            //queremos medir el rendimiento
+            //no la reconoce porque no esta en namespace
+            //o llamar a System.diagnostics
+            Stopwatch krono = new Stopwatch();
+            //iniciamos el contador
+            krono.Start();
+            //recorremos el texto
+            for (int i = 0; i < texto.Length; i++)
+            {
+                char letra = texto[texto.Length - 1];
+                texto = texto.Remove(texto.Length - 1, 1);
+                texto = texto.Insert(i, letra.ToString());
 
+            }
+            Console.WriteLine("----------------------");
+            krono.Stop();
+            Console.WriteLine(texto);
+            Console.WriteLine("Milisegundos tardados: " + krono.Elapsed.TotalMilliseconds);
+        }
+        static void InvertirTextoStringBuilder(string datos)
+        {
+            //queremos medir el rendimiento
+            //no la reconoce porque no esta en namespace
+            //o llamar a System.diagnostics
+            Stopwatch krono = new Stopwatch();
+            //iniciamos el contador
+            krono.Start();
+            StringBuilder texto = new StringBuilder();
+            texto.Append(datos);
+            //añadimos el texto al builder
+            //recorremos el texto
+            for (int i = 0; i < texto.Length; i++)
+            {
+                char letra = texto[texto.Length - 1];
+                texto = texto.Remove(texto.Length - 1, 1);
+                texto = texto.Insert(i, letra.ToString());
+
+            }
+            Console.WriteLine("----------------------");
+            krono.Stop();
+            Console.WriteLine(texto);
+            Console.WriteLine("Milisegundos tardados: " + krono.Elapsed.TotalMilliseconds);
+        }
+        static void EjemploColecciones()
+        {
+            List<int> numero = new List<int>();
+            //al tener tipado nos da errores de compilacion
+            numero.Add(45);
+            numero.Add(5);
+            List<String> nombre = new List<string>();
+            nombre.Add("Jesus");
+            nombre.Add("Ana");
+            nombre.Add("Pedro");
+            nombre.Add("Ana");
+            foreach(int num in numero)
+            {
+                Console.WriteLine(num);
+            }
+            foreach(string nom in nombre)
+            {
+                Console.WriteLine(nom);
+            }
+        }
+        static void EjemploColecciones2()
+        {
+            string respuesta = "S";
+            List<String> nombres = new List<string>();
+            while(respuesta != "N")
+            {
+                Console.WriteLine("Introduce nombres: ");
+                string valor = Console.ReadLine();
+                nombres.Add(valor);
+                Console.WriteLine("¿Quieres continuar? (S/N): ");
+                respuesta = Console.ReadLine();
+            }
+            foreach(string name in nombres)
+            {
+                Console.WriteLine(name);
+            }
+        }
 
     }
 }
