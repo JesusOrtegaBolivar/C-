@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using FundamentosLenguaje.Helpers;
 using FundamentosLenguaje.Models;
 
 namespace FundamentosLenguaje
@@ -11,24 +12,49 @@ namespace FundamentosLenguaje
     {
         static void Main(string[] args)
         {
-            Persona persona2 = new Persona("Lucas", "Perez");
-            Console.WriteLine(persona2.GetNombreCompleto());
-            Persona person = new Persona();
-            Empleado emp = new Empleado();
-            emp.Nombre = "Luis";
-            emp.Apellidos = "Garcia";
-            Console.WriteLine(emp.GetNombreCompleto());
-            emp.Salario = 1200;
-            person.Apellidos = "Ortega Bolivar";
-            person.Nombre = "Jesus";
-            person[0] = "Ojos Azules";
-            person[1] = "Pelo largo";
-            person[2] = "Pelo corto";
-            person.ConvertirDescripcion();
-            Console.WriteLine(person[0]);
-            Console.WriteLine(person.GetNombreCompleto());
-            Console.WriteLine(person.GetNombreCompleto(true));
+            Coche car1 = new Coche("Opel", "Astra", 250, "Norte");
+            int opcion = 0;
+            while (opcion != 5)
+            {
+                Console.WriteLine("-------------------");
+                Console.WriteLine("1.- Arrancar");
+                Console.WriteLine("2.- Acelerar");
+                Console.WriteLine("3.- Frenar");
+                Console.WriteLine("4.- Girar");
+                Console.WriteLine("5.- Salir");
+                Console.WriteLine("--------------------");
+                Console.WriteLine("6.- Ver informacion");
+                opcion = int.Parse(Console.ReadLine());
+                
+                if(opcion == 1)
+                {
+                    car1.Arrancar();
+                }else if (opcion == 2)
+                {
+                    Console.WriteLine("Quieres indicar la velocidad");
+                    int valor = int.Parse(Console.ReadLine());
+                    car1.Acelerar(valor);
+                }else if (opcion == 3)
+                {
+                    Console.WriteLine("Quieres indicar la velocidad");
+                    int valor = int.Parse(Console.ReadLine());
+                    car1.Frenar(valor);
+                }else if (opcion == 4)
+                {
+                    car1.Girar();
+                }else if (opcion == 5)
+                {
+                    Console.WriteLine("Saliendo del programa");
+                } else if (opcion == 6)
+                {
+                    Console.WriteLine(car1);
+                } else
+                {
+                    Console.WriteLine("Ha ocurrido un error");
+                }
+            }
         }
+
 
         static void NumeroPositivoNegativo()
         {

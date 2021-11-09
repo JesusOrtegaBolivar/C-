@@ -13,6 +13,7 @@ namespace FundamentosLenguaje.Models
         {
             this.Nacionalidad = Paises.España;
             this.Edad = 0;
+            Console.WriteLine("Constructor de persona");
         }
         public Persona(String nombre, String Apellidos)
         {
@@ -26,8 +27,9 @@ namespace FundamentosLenguaje.Models
                 this._Descripcion[i] = this._Descripcion[i].ToUpper();
             }
         }
-        public String GetNombreCompleto()
+        public virtual String GetNombreCompleto()
         {
+            Console.WriteLine("GetNombreCompleto Persona");
             return this.Nombre + " " + this.Apellidos;
         }
         //poliformismo
