@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using AccesoDatos.Models;
+using AccesoDatos.Repositories;
 
 namespace AccesoDatos
 {
@@ -7,9 +10,22 @@ namespace AccesoDatos
     {
         static void Main(string[] args)
         {
-            MostrarDatosEmpleados();
+            //RepositoryDepartamentos repo = new RepositoryDepartamentos();
+            ////necesitamos recuperar todos los departamento
+            //List<Departamento> departamentos = repo.GetDepartamentos();
+            //foreach(Departamento dept in departamentos)
+            //{
+            //    Console.WriteLine(dept.Numero + " - " + dept.Nombre + " - " + dept.Localidad);
+            //}
+            RepositoryDoctor repo = new RepositoryDoctor();
+            List<Doctor> doctores = repo.GetDoctores();
+            foreach(Doctor doctor in doctores)
+            {
+                Console.WriteLine("Nombre: " + doctor.apellido + " NumeroDoctor " + doctor.doctor_no + " Salario " + doctor.salario + " Especialidad: " + doctor.especialidad + " Hospital: " + doctor.hospital_cod);
+            }
         }
-        static void LeerRegistros() {
+        static void LeerRegistros()
+        {
             string cadenaConexion = @"Data Source=LOCALHOST\SQLEXPRESS;Initial Catalog=HOSPITAL;Persist Security Info=True;User ID=SA;Password=azure";
             SqlConnection cn = new SqlConnection(cadenaConexion);
             SqlCommand com = new SqlCommand();
@@ -89,6 +105,41 @@ namespace AccesoDatos
             reader.Close();
             conexcion.Close();
             comando.Parameters.Clear();
+        }
+        static void ModificarNombreSala()
+        {
+            string cadenaConexion = @"Data Source=LOCALHOST\SQLEXPRESS;Initial Catalog=HOSPITAL;Persist Security Info=True;User ID=SA;Password=azure";
+            SqlConnection conexion = new SqlConnection(cadenaConexion);
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader reader;
+            String sqlselect = "SELECT distinct SALA_COD, NOMBRE FROM SALA";
+            comando.Connection = conexion;
+            comando.CommandText = sqlselect;
+            comando.CommandType = System.Data.CommandType.Text;
+            conexion.Open();
+            reader = comando.ExecuteReader();
+            while (reader.Read())
+            {
+                String id = reader["SALA_COD"].ToString();
+                String nombre = reader["NOMBRE"].ToString();
+                Console.WriteLine("ID: " + id + " Nombre: " + nombre);
+            }
+            reader.Close();
+            Console.WriteLine("Introduce el id de la sala que quieras modificar: ");
+            int numero = int.Parse(Console.ReadLine());
+            Console.WriteLine("Introduce el nuevo nombre: ");
+            string nombresala = Console.ReadLine();
+            //nueva consulta
+            string sqlupdate = "UPDATE SALA SET NOMBRE = @NOMBRESALA WHERE SALA_COD = @SALA_COD";
+            comando.CommandText = sqlupdate;
+            SqlParameter parametro1 = new SqlParameter("NOMBRESALA", nombresala);
+            comando.Parameters.Add(parametro1);
+            SqlParameter parametro2 = new SqlParameter("SALA_COD", numero);
+            comando.Parameters.Add(parametro2);
+            int modificados = comando.ExecuteNonQuery();
+            conexion.Close();
+            comando.Parameters.Clear();
+            Console.WriteLine(modificados);
         }
     }
 }
