@@ -1,0 +1,13 @@
+﻿<h1>Sumar dos numeros</h1>
+
+<a asp-controller="Practicas" asp-action="Menu">Volver al menu</a>
+<hr />
+<form method="post">
+    <label>Introduce un numero</label>
+    <input type="number" name="numero1" class="form-control"/>
+    <label>Introduce un numero</label>
+    <input type="number" name="numero2" class="form-control"/>
+    <button class="btn btn-info">Enviar datos</button>
+</form>
+
+<h1>La suma es: @ViewBag.Suma</h1>

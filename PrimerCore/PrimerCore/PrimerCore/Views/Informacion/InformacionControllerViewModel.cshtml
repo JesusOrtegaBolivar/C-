@@ -1,0 +1,18 @@
+﻿@model List<Persona>
+
+<h1>Controller View Model</h1>
+
+<a asp-controller="Informacion" asp-action="Index">Volver Atrás</a>
+
+<hr />
+
+<table class="table table-dark">
+    @foreach(Persona person in Model)
+            {
+                <tr>
+                    <td>@person.Nombre</td>
+                    <td>@person.Edad</td>
+                    <td>@person.Email</td>
+                </tr>
+            }
+</table>
