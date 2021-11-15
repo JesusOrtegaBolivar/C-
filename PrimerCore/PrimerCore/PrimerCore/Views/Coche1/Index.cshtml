@@ -1,0 +1,13 @@
+﻿@model Coche
+<h1>Controller 1 de coche</h1>
+
+<img src="~/images/descarga.jpg" />
+
+<h1 style="color:blue">Marca : @Model.Marca, Modelo: @Model.Modelo</h1>
+<h2 style="color:red">Velocidad Maxima: @Model.VelocidadMaxima</h2>
+<h2 style="color:orange">Velocidad actual: @Model.Velocidad</h2>
+
+<form method="post">
+    <button class="btn-success" name="accion" value="acelerar">Acelerar</button>
+    <button class="btn-danger" name="accion" value="frenar">Frenar</button>
+</form>

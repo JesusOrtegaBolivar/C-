@@ -1,5 +1,24 @@
 ﻿<h1>Menu</h1>
-<a asp-controller="Practicas" asp-action="EjemploColecciones">Ver Todos los comics</a>
-<a asp-controller="Practicas" asp-action="SumarNumerosGet" asp-route-numero1="10" asp-route-numero2="5">Sumar dos numeros con Get</a>
-<a asp-controller="Practicas" asp-action="SumarNumerosPost">Sumar dos numeros</a>
-
+<ul class="list-group">
+    <li class="list-group-item">
+        <a asp-controller="Practicas" asp-action="EjemploColecciones">Ver Todos los comics</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Practicas" asp-action="SumarNumerosGet" asp-route-numero1="10" asp-route-numero2="5">Sumar dos numeros con Get</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Practicas" asp-action="SumarNumerosPost">Sumar dos numeros</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Practicas" asp-action="TablaMultiplicar">Tabla de multiplicar</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Matematicas" asp-action="ConjeturaCollatz">ConjeturaCollatz</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Coche1" asp-action="Index">Coche1</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Coche2" asp-action="Index">Coche2</a>
+    </li>
+</ul>
