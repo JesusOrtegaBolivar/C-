@@ -1,0 +1,13 @@
+﻿@model Bici
+<h1 style="color:blue">Bici1</h1>
+
+<h1 style="color:blue">Marca: @Model.Marca</h1>
+<h1 style="color:blue">Modelo: @Model.Modelo</h1>
+
+<form method="post">
+    <button class="btn-success" name="accion" value="acelerar">Acelerar</button>
+    <button class="btn-danger" name="accion" value="frenar">Frenar</button>
+</form>
+
+<h2>Velocidad Maxima: @Model.VelocidadMaxima.</h2>
+<h2>Velocidad Maxima: @Model.Velocidad.</h2>
