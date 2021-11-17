@@ -1,3 +1,4 @@
+using AccesoDatosCore.Data;
 using AccesoDatosCore.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +31,14 @@ namespace AccesoDatosCore
             bicicleta.Velocidad = 0;
             bicicleta.VelocidadMaxima = 50;
             services.AddTransient<Bici>(bici => bicicleta);
+
+            String cadenaconexion = this.Configuration.GetConnectionString("hospitallocal");
+            PlantillasContext conxtext = new PlantillasContext(cadenaconexion);
+            EmpleadosContext context = new EmpleadosContext(cadenaconexion);
+            services.AddTransient<EmpleadosContext>(contexto => context);
+            services.AddTransient<PlantillasContext>(contexto => conxtext);
+
+
             services.AddControllersWithViews();
         }
 

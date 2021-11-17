@@ -20,7 +20,7 @@ namespace AccesoDatosCore.Controllers
             return View(this.bici1);
         }
         [HttpPost]
-        public IActionResult index(String accion)
+        public IActionResult Index(String accion)
         {
             if (accion == "acelerar")
             {
