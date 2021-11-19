@@ -33,10 +33,12 @@ namespace AccesoDatosCore
             services.AddTransient<Bici>(bici => bicicleta);
 
             String cadenaconexion = this.Configuration.GetConnectionString("hospitallocal");
+            EnfermoContext enfermoContext = new EnfermoContext(cadenaconexion);
             PlantillasContext conxtext = new PlantillasContext(cadenaconexion);
             EmpleadosContext context = new EmpleadosContext(cadenaconexion);
             services.AddTransient<EmpleadosContext>(contexto => context);
             services.AddTransient<PlantillasContext>(contexto => conxtext);
+            services.AddTransient<EnfermoContext>(contexto => enfermoContext);
 
 
             services.AddControllersWithViews();

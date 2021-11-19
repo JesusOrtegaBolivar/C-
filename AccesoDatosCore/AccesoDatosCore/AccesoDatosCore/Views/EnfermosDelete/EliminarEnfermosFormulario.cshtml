@@ -1,0 +1,32 @@
+﻿@model List<Enfermo>
+<h1>Lista de enfermos</h1>
+
+<form method="post">
+    <label>Selecciona el enfermo a eliminar</label>
+    <select name="inscripcion" class="form-control">
+        @foreach(Enfermo enfermo in Model){
+            <option value="@enfermo.Inscripcion">@enfermo.Apellido</option>
+        }
+    </select>
+    <button class="btn btn-danger">Eliminar</button>
+</form>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Apellido</th>
+            <th>Direccion</th>
+            <th>Inscripcion</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Enfermo enf in Model){
+            <tr>
+                <td>@enf.Apellido</td>
+                <td>@enf.Direccion</td>
+                <td>@enf.Inscripcion</td>
+            </tr>
+        }
+    </tbody>
+</table>
