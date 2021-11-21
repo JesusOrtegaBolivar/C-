@@ -109,7 +109,7 @@ namespace AccesoDatosCore.Data
             this.com.Parameters.Clear();
             return plantilla;
         }
-        public int UpdatePlantillaFuncion(string funcion, int incremento)
+        public int UpdatePlantillaFuncion(String funcion, int incremento)
         {
             String sql = "UPDATE PLANTILLA SET SALARIO = SALARIO + @INCREMENTO WHERE FUNCION = @FUNCION";
             this.com.CommandText = sql;
@@ -122,6 +122,29 @@ namespace AccesoDatosCore.Data
             this.com.Parameters.Clear();
             this.cn.Close();
             return resultado;
+        }
+        public List<Plantilla> GetPlantillaHospital(int hospital)
+        {
+            String sql = "select * from PLANTILLA where HOSPITAL_COD = @HOSPITAL";
+            SqlParameter parametro = new SqlParameter("@HOSPITAL", hospital);
+            this.com.CommandText = sql;
+            this.com.Parameters.Add(parametro);
+            this.cn.Open();
+            this.reader = this.com.ExecuteReader();
+            List<Plantilla> plantilla = new List<Plantilla>();
+            while (this.reader.Read())
+            {
+                Plantilla plant = new Plantilla();
+                plant.Apellido = this.reader["APELLIDO"].ToString();
+                plant.Funcion = this.reader["FUNCION"].ToString();
+                plant.Salario = (int)this.reader["SALARIO"];
+                plant.Hospital_cod = (int)this.reader["HOSPITAL_COD"];
+                plantilla.Add(plant);
+            }
+            this.reader.Close();
+            this.cn.Close();
+            this.com.Parameters.Clear();
+            return plantilla;
         }
     }
 }
