@@ -15,10 +15,11 @@ namespace AccesoDatosCore.Controllers
         {
             this.context = context;
         }
-        public IActionResult Index()
+        public IActionResult Index(String code)
         {
+            int numero = int.Parse(code);
             List<Plantilla> plantilla = new List<Plantilla>();
-            plantilla = this.context.GetPlantillaHospital(19);
+            plantilla = this.context.GetPlantillaHospital(numero);
             return View(plantilla);
         }
     }

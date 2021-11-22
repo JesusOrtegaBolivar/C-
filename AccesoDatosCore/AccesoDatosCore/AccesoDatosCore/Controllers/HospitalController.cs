@@ -19,6 +19,14 @@ namespace AccesoDatosCore.Controllers
         {
             return View();
         }
+        public IActionResult Index(String codehospital)
+        {
+
+            List<Hospital> hospital = new List<Hospital>();
+            hospital = this.context.GetHospital(codehospital);
+            return View(hospital);
+        }
+
         public IActionResult Provincial()
         {
             List<Hospital> hospital = new List<Hospital>();

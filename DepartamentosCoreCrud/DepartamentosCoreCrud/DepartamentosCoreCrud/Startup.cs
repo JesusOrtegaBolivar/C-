@@ -1,5 +1,4 @@
-using AccesoDatosCore.Data;
-using AccesoDatosCore.Models;
+using DepartamentosCoreCrud.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AccesoDatosCore
+namespace DepartamentosCoreCrud
 {
     public class Startup
     {
@@ -25,26 +24,9 @@ namespace AccesoDatosCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            Bici bicicleta = new Bici();
-            bicicleta.Marca = "Marca de bici";
-            bicicleta.Modelo = "Modelo de bici";
-            bicicleta.Velocidad = 0;
-            bicicleta.VelocidadMaxima = 50;
-            services.AddTransient<Bici>(bici => bicicleta);
-
-            String cadenaconexion = this.Configuration.GetConnectionString("hospitallocal");
-            DoctoresContext doctorescontext = new DoctoresContext(cadenaconexion);
-            HospitalesContext hospitalcontext = new HospitalesContext(cadenaconexion);
-            EnfermoContext enfermoContext = new EnfermoContext(cadenaconexion);
-            PlantillasContext conxtext = new PlantillasContext(cadenaconexion);
-            EmpleadosContext context = new EmpleadosContext(cadenaconexion);
-            services.AddTransient<EmpleadosContext>(contexto => context);
-            services.AddTransient<PlantillasContext>(contexto => conxtext);
-            services.AddTransient<EnfermoContext>(contexto => enfermoContext);
-            services.AddTransient<HospitalesContext>(contexto => hospitalcontext);
-            services.AddTransient<DoctoresContext>(contexto => doctorescontext);
-
-
+            String cadenaconexion = this.Configuration.GetConnectionString("cadenahospitallocal");
+            DepartamentosContext context = new DepartamentosContext(cadenaconexion);
+            services.AddTransient<DepartamentosContext>(contexto => context);
             services.AddControllersWithViews();
         }
 
@@ -72,7 +54,7 @@ namespace AccesoDatosCore
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Departamentos}/{action=Index}/{id?}");
             });
         }
     }
